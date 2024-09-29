@@ -35,7 +35,7 @@ def load_commodity_data():
     return commodity_data
 # Load the dataset
 def load_health_data():
-    file_path = '2023-2024-israel-and-opt-attacks-on-health-care-incident-data.xlsx'
+    file_path = r'..\misic\data-points\spreadsheets\xslx\2023-2024-israel-and-opt-attacks-on-health-care-incident-data.xlsx'
     data = pd.read_excel(file_path)
     data_cleaned = data.dropna(axis=1)
     df = data_cleaned
