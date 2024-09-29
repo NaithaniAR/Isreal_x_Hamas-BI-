@@ -20,7 +20,7 @@ st.title("Israel-Hamas Conflict Analysis Dashboard")
 @st.cache_data
 
 def load_commodity_data():
-    file_path = r"data-points\spreadsheets\xslx\commodity-prices-in-gaza-4-1.xlsx"
+    file_path = "commodity-prices-in-gaza-4-1.xlsx"
     commodity_data = pd.read_excel(file_path)
     commodity_data = commodity_data.drop(columns=['Unnamed: 0', 'commodity name (arabic)', 'amount (arabic)'])
     commodity_data['commodity name (english)'] = commodity_data['commodity name (english)'].str.replace(r'\(.*\)', '', regex=True).str.strip()
@@ -35,19 +35,18 @@ def load_commodity_data():
     return commodity_data
 # Load the dataset
 def load_health_data():
-    file_path = r'data-points\spreadsheets\xslx\2023-2024-israel-and-opt-attacks-on-health-care-incident-data.xlsx'
+    file_path = '2023-2024-israel-and-opt-attacks-on-health-care-incident-data.xlsx'
     data = pd.read_excel(file_path)
     data_cleaned = data.dropna(axis=1)
     df = data_cleaned
     df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
     return df
 
-
+df = load_health_data()
 
 print('ok')
 
 if analysis_category == "Health Care Incidents":
-    df = load_health_data()
     st.header("Health Care Incidents Analysis")
     
     st.write("This analysis provides insights into the health care incidents during the Israel-Hamas conflict.")
