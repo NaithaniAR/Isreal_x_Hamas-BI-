@@ -1,0 +1,8 @@
+services:
+  streamlit:
+    container_name: "Hamas_x_Isreal"
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    ports:
+      - '8000:8080'
