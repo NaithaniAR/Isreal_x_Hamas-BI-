@@ -6,6 +6,23 @@ import seaborn as sns
 # Set page configuration
 st.set_page_config(layout="wide", page_title="Israel-Hamas Conflict Analysis Dashboard")
 
+
+def load_commodity_data():
+    file_path = "commodity-prices-in-gaza-4-1.xlsx"
+    commodity_data = pd.read_excel(file_path)
+    commodity_data = commodity_data.drop(columns=['Unnamed: 0', 'commodity name (arabic)', 'amount (arabic)'])
+    commodity_data['commodity name (english)'] = commodity_data['commodity name (english)'].str.replace(r'\(.*\)', '', regex=True).str.strip()
+    commodity_data.columns = ['Commodity Name', 'Amount', 'Price-7th October', 
+                                'average price after 7 October 2023', 'Monthly Percent Change % (Oct-Sep)', 
+                                'Nov-23', 'Monthly Percent Change % (Nov-Oct)', 'Dec-23', 
+                                'Monthly Percent Change % (Nov-Dec)', 'Jan-24', 
+                                'Monthly Percent Change % (Dec-Jan)', 'Feb-24', 
+                                'Monthly Percent Change % (Jan-Feb)', 'Mar-24', 
+                                'Monthly Percent Change % (Feb-Mar)', 'Apr-24', 
+                                'Monthly Percent Change % (Mar-Apr)', 'Acumulative change']
+    return commodity_data
+
+
 # Sidebar with radio buttons
 st.sidebar.title("Analysis Categories")
 analysis_category = st.sidebar.radio(
@@ -20,7 +37,7 @@ st.title("Israel-Hamas Conflict Analysis Dashboard")
 @st.cache_data
 
 def load_commodity_data():
-    file_path = "commodity-prices-in-gaza-4-1.xlsx"
+    file_path = "libs/misic/data-points/spreadsheets/xslx/commodity-prices-in-gaza-4-1.xlsx"
     commodity_data = pd.read_excel(file_path)
     commodity_data = commodity_data.drop(columns=['Unnamed: 0', 'commodity name (arabic)', 'amount (arabic)'])
     commodity_data['commodity name (english)'] = commodity_data['commodity name (english)'].str.replace(r'\(.*\)', '', regex=True).str.strip()
@@ -127,6 +144,8 @@ if analysis_category == "Health Care Incidents":
 elif analysis_category == "Commodity Market":
 
     commodity_data = load_commodity_data()
+
+
 
     st.header("Commodity Market Analysis")
     
