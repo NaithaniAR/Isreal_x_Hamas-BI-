@@ -93,7 +93,7 @@ class HealthCareIncidentsAnalysis:
 # Usage
 def load_health_data():
     # Replace this with your actual data loading logic
-    file_path = r'/home/marktine/data Vis/Isreal_x_Hamas-BI-/libs/misic/data-points/spreadsheets/xslx/2023-2024-israel-and-opt-attacks-on-health-care-incident-data.xlsx'
+    file_path = r'libs\misic\data-points\spreadsheets\xslx\2023-2024-israel-and-opt-attacks-on-health-care-incident-data.xlsx'
     data = pd.read_excel(file_path)
     data_cleaned = data.dropna(axis=1)
     df = data_cleaned

@@ -11,7 +11,7 @@ sys.path.append('../')
 @st.cache_data
 def load_data():
     """Load data from Excel and preprocess it."""
-    file_path = '/home/marktine/data Vis/Isreal_x_Hamas-BI-/libs/misic/data-points/spreadsheets/xslx/palestine_hrp_civilian_targeting_events_and_fatalities_by_month-year_as-of-29may2024.xlsx'
+    file_path = 'libs\misic\data-points\spreadsheets\xslx\palestine_hrp_civilian_targeting_events_and_fatalities_by_month-year_as-of-29may2024.xlsx'
     df = pd.read_excel(file_path, sheet_name='Data')
     df['month_of_year'] = df['Month'].str[:3] + '-' + df['Year'].astype(str).str[-2:]
     df['Fatalities'] = df['Fatalities'].astype(int)
